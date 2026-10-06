@@ -1,0 +1,43 @@
+@Movimentacoes_HostAddress = http://localhost:5023
+
+### 1. Listar todos os produtos e estoques atuais no depósito
+GET {{Movimentacoes_HostAddress}}/api/movimentacoes/produtos
+Accept: application/json
+
+### 2. Consultar um produto específico (Caneta Azul - Código 101)
+GET {{Movimentacoes_HostAddress}}/api/movimentacoes/produtos/101
+Accept: application/json
+
+### 3. Lançar uma movimentação de ENTRADA (ex: +50 Canetas Azuis)
+POST {{Movimentacoes_HostAddress}}/api/movimentacoes
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 1,
+  "codigoProduto": 101,
+  "tipo": "Entrada",
+  "quantidade": 50,
+  "descricao": "Entrada de estoque referente a compra com Fornecedor A"
+}
+
+### 4. Lançar uma movimentação de SAÍDA (ex: -15 Cadernos Universitários)
+POST {{Movimentacoes_HostAddress}}/api/movimentacoes
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 2,
+  "codigoProduto": 102,
+  "tipo": "Saida",
+  "quantidade": 15,
+  "descricao": "Saída para atendimento de pedido do cliente XPTO"
+}
+
+### 5. Consultar o histórico de movimentações realizadas
+GET {{Movimentacoes_HostAddress}}/api/movimentacoes/historico
+Accept: application/json
+
+### 6. Resetar os estoques para os valores iniciais
+POST {{Movimentacoes_HostAddress}}/api/movimentacoes/resetar
+Accept: application/json
